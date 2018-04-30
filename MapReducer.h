@@ -7,9 +7,8 @@
 
 #include <map>
 #include <vector>
-
 #include <string>
-#include <map>
+
 
 class MapReducer {
 

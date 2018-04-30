@@ -31,6 +31,8 @@ Queue &ThreadDispatcher::getQueue(){
 ThreadDispatcher::ThreadDispatcher(Queue &queue, MapsQueue &mapsQueue) : queue(queue), mapsQueue(mapsQueue) {}
 
 void ThreadDispatcher::test() {
+
+    conditions.isData;
     for(int i=0; i<10; i++){
 
         testvec.emplace_back(WordsCounter(mapsQueue, queue));

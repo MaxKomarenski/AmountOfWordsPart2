@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(AmountOfWordsPart2 main.cpp Queue.cpp Queue.h FileReader.cpp
         FileReader.h WordsCounter.cpp WordsCounter.h MapsQueue.cpp MapsQueue.h ThreadDispatcher.cpp ThreadDispatcher.h
-        MapReducer.h MapReducer.cpp)
+        MapReducer.h MapReducer.cpp ConditionsVariables.h ConditionVariables.cpp ConditionVariables.h)

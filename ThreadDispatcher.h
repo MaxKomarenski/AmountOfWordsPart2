@@ -5,6 +5,7 @@
 #ifndef AMOUNTOFWORDSPART2_THREADDISPATCHER_H
 #define AMOUNTOFWORDSPART2_THREADDISPATCHER_H
 
+#include "ConditionVariables.h"
 #include <vector>
 #include <thread>
 #include "WordsCounter.h"
