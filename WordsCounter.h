@@ -11,7 +11,8 @@ class WordsCounter {
 
 
 
-   public void count_words();
+public:
+    void count_words();
 
 
 
