@@ -9,6 +9,7 @@ void MapsQueue::push(std::map<std::string, int> &m) {
 }
 
 std::map<std::string, int> MapsQueue::pop() {
+    std::lock_guard<std::mutex> lock(gueue_mutex);
     if(!queue.empty()){
         std::map<std::string, int> first = queue[0];
         queue.erase(queue.begin());
@@ -19,9 +20,11 @@ std::map<std::string, int> MapsQueue::pop() {
 }
 
 unsigned long MapsQueue::getSize() {
+    std::lock_guard<std::mutex> lock(gueue_mutex);
     return queue.size();
 }
 
 bool MapsQueue::isEmpty() {
+    std::lock_guard<std::mutex> lock(gueue_mutex);
     return queue.empty();
 }

@@ -1,0 +1,14 @@
+//
+// Created by User on 30.04.2018.
+//
+
+#ifndef AMOUNTOFWORDSPART2_MAPREDUCER_H
+#define AMOUNTOFWORDSPART2_MAPREDUCER_H
+
+
+class MapReducer {
+
+};
+
+
+#endif //AMOUNTOFWORDSPART2_MAPREDUCER_H
