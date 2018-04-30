@@ -9,6 +9,7 @@ void Queue::push(std::vector<std::string> &v) {
 }
 
 std::vector<std::string> Queue::pop() {
+    std::lock_guard<std::mutex> lock(gueue_mutex);
     if(!queue.empty()){
         std::vector<std::string> first = queue[0];
         queue.erase(queue.begin());
@@ -19,10 +20,12 @@ std::vector<std::string> Queue::pop() {
 }
 
 unsigned long Queue::getSize() {
+    std::lock_guard<std::mutex> lock(gueue_mutex);
     return queue.size();
 }
 
 bool Queue::isEmpty() {
+    std::lock_guard<std::mutex> lock(gueue_mutex);
     return queue.empty();
 }
 
