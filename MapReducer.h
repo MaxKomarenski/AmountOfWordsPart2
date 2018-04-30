@@ -5,6 +5,8 @@
 #ifndef AMOUNTOFWORDSPART2_MAPREDUCER_H
 #define AMOUNTOFWORDSPART2_MAPREDUCER_H
 
+#include <map>
+#include <vector>
 
 class MapReducer {
 

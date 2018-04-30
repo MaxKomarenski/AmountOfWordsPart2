@@ -14,8 +14,8 @@
 #include <mutex>
 
 class MapsQueue {
-    std::vector<std::map<std::string, int>> *queue;
-    std::mutex *gueue_mutex;
+    std::vector<std::map<std::string, int>> queue;
+    std::mutex gueue_mutex;
 public:
 
     MapsQueue();
