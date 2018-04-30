@@ -8,9 +8,12 @@
 #include <map>
 #include <vector>
 
+#include <string>
+#include <map>
+
 class MapReducer {
 
-    std::map<std::string, int> merge_in_one_map(const std::vector<std::map <std::string, int>> &maps);
+    std::map<std::string, int> merge_in_one_map(std::map<std::string, int> map1, std::map<std::string, int> map2);
 
 };
 

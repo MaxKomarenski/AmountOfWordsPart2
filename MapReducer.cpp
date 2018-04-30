@@ -4,18 +4,17 @@
 
 #include "MapReducer.h"
 
-std::map<std::string, int> MapReducer::merge_in_one_map(const std::vector<std::map <std::string, int>> &maps){
-    std::map<std::string, int> merged_map;
+std::map<std::string, int> MapReducer::merge_in_one_map(std::map<std::string, int> map1, std::map<std::string, int> map2){
 
-    for(auto map:maps){
-        for (auto const& element : map) {
-            if(merged_map.count(element.first)){
-                merged_map[element.first]+=element.second;
+
+        for (auto const& element : map2) {
+            if(map1.count(element.first)){
+                map1[element.first]+=element.second;
             }else{
-                merged_map[element.first] = element.second;
+                map1[element.first] = element.second;
             }
 
         }
-    }
-    return merged_map;
+
+    return map1;
 }
