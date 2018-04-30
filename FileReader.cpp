@@ -39,3 +39,10 @@ void FileReader::read_from_file(Queue &queue) {
 }
 
 FileReader::FileReader(int block_size) : block_size(block_size) {}
+
+void FileReader::start(Queue &queue) {
+
+    std::thread t(read_from_file, this, std::ref(queue));
+    t.join();
+
+}

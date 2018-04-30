@@ -30,3 +30,19 @@ bool Queue::isEmpty() {
 }
 
 
+
+Queue::Queue() {
+
+
+
+}
+
+Queue::~Queue() {
+
+}
+
+
+
+
+
+

@@ -7,13 +7,21 @@
 
 
 #include <map>
+
+
+
 #include <vector>
 #include <mutex>
 
 class MapsQueue {
-    std::vector<std::map<std::string, int>> queue;
-    std::mutex gueue_mutex;
+    std::vector<std::map<std::string, int>> *queue;
+    std::mutex *gueue_mutex;
 public:
+
+    MapsQueue();
+
+    MapsQueue(MapsQueue &q);
+
     void push(std::map<std::string, int> &m);
     std::map<std::string, int> pop();
     unsigned long getSize();

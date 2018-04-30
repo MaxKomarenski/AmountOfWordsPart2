@@ -14,8 +14,9 @@ private:
     int block_size;
 public:
     FileReader(int block_size);
+    void  start(Queue &queue);
 
-public:
+private:
     void read_from_file(Queue &queue);
 
 
