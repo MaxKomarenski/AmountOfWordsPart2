@@ -3,6 +3,7 @@
 #include "MapsQueue.h"
 #include "ThreadDispatcher.h"
 #include "Configuration.h"
+#include "FileWriter.h"
 
 
 void configure(Configuration& conf);
@@ -28,12 +29,15 @@ int main() {
     dispatcher.test();
 
 
-    std::cout << "FIISH SIZE: " << mapsQueue.getSize() << "\n";
     for(auto elem : mapsQueue.getQueue()){
         for( auto m :elem){
             std::cout<<m.first<<" "<<m.second<<"\n";
         }
     }
+
+    FileWriter fileWriter;
+
+    fileWriter.sort_by_letters_and_write_into_file(mapsQueue.pop(), "new.txt");
 
 
 
