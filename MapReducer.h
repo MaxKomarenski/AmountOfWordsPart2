@@ -10,10 +10,11 @@
 #include <string>
 #include "MapsQueue.h"
 #include "Queue.h"
-
+#include <iostream>
 
 class MapReducer {
 
+public:
     void map_reduce(MapsQueue &mapsQueue, Queue &queue);
 
 };

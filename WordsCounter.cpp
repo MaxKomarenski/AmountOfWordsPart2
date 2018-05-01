@@ -15,6 +15,7 @@
                  break;
              conditions.isData.wait(lck,[&queue] { return !queue.isEmpty();});
              data = queue.pop();
+            // std::cout<<"Queue size: "<<queue.getSize()<<"\n";
          }
          for (int i = 0; i < data.size(); ++i){
              if (m.count(data.at(i))){
@@ -24,10 +25,13 @@
              }
 
          }
-         std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-         mapsQueue.push(m);
-         conditions.queueHasMap.notify_one();
-         m.clear();
+         {
+             mapsQueue.push(m);
+             std :: unique_lock<std::mutex> lck(conditions.data_mutex);
+            // std::cout<<"Pushing to  maps queue"<<" By"<<std::this_thread::get_id()<<"\n";
+             conditions.queueHasMap.notify_one();
+            m.clear();
+         }
      }
 }
 

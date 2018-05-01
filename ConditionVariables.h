@@ -10,8 +10,9 @@ struct ConditionVariables{
     std::mutex data_mutex;
     std:: condition_variable isData;
     std:: condition_variable queueHasMap;
-    std:: condition_variable wc_ready;
+    std:: condition_variable reduce_finished;
     bool readingIsFinished = false;
+    bool merging_in_process = false;
 };
 
 

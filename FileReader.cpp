@@ -9,7 +9,7 @@ void FileReader::read_from_file(Queue &queue) {
 
     std::string str;
 
-    std::ifstream fin("here.txt"); // Open it up!
+    std::ifstream fin("text.txt"); // Open it up!
     int i =0;
     std::string result;
     while (fin >> str) // Will read up to eof() and stop at every

@@ -8,7 +8,7 @@ int main() {
 
 
     Queue queue;
-    FileReader  fileReader(15);
+    FileReader  fileReader(10000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
     fileReader.start(queue);
@@ -16,8 +16,13 @@ int main() {
     std::cout<<queue.getSize()<<"\n";
     dispatcher.test();
 
-    std::cout<<queue.getSize()<<"\n";
-    std::cout<<mapsQueue.getSize()<<"\n";
+
+    std::cout << "FIISH SIZE: " << mapsQueue.getSize() << "\n";
+    for(auto elem : mapsQueue.getQueue()){
+        for( auto m :elem){
+            std::cout<<m.first<<" "<<m.second<<"\n";
+        }
+    }
 
 
 
