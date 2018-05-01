@@ -11,13 +11,13 @@ void configure(Configuration& conf);
 int main() {
 
     Configuration conf;
-//    try{
-//        configure(conf);
-//    }catch(...){
-//        return 0;
-//    }
+    try{
+        configure(conf);
+    }catch(...){
+        return 0;
+    }
 
-   // std::cout<<conf;
+    std::cout<<conf;
 
 
 
@@ -25,7 +25,7 @@ int main() {
     FileReader  fileReader(4);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
-    fileReader.start(queue);
+    fileReader.start(queue, conf.getFileRead());
     dispatcher.test();
 
 
@@ -35,9 +35,9 @@ int main() {
         }
     }
 
-    FileWriter fileWriter;
+   // FileWriter fileWriter;
 
-    fileWriter.sort_by_letters_and_write_into_file(mapsQueue.pop(), "new.txt");
+   // fileWriter.sort_by_letters_and_write_into_file(mapsQueue.pop(), "new.txt");
 
 
 

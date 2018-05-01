@@ -67,7 +67,7 @@ std::string Configuration::parseString(std::string input) {
 std::ostream &operator<<(std::ostream &os, const Configuration &configuration) {
     os << "\nfileRead: "
        << configuration.fileRead << "\nfileWriteSortedByLetters: " << configuration.fileWriteSortedByLetters
-       << "\nfileWriteSortedByAmount: " << configuration.fileWriteSortedByAmount << "\nThreads: ";
+       << "\nfileWriteSortedByAmount: " << configuration.fileWriteSortedByAmount<<"\n";
     return os;
 }
 

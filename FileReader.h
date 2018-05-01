@@ -16,10 +16,10 @@ private:
     int block_size;
 public:
     FileReader(int block_size);
-    void  start(Queue &queue);
+    void  start(Queue &queue,std::string file);
 
 private:
-    void read_from_file(Queue &queue);
+    void read_from_file(Queue &queue, std::string file);
 
 
 

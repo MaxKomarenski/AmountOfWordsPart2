@@ -4,12 +4,12 @@
 
 #include "FileReader.h"
 
-void FileReader::read_from_file(Queue &queue) {
+void FileReader::read_from_file(Queue &queue,std::string file) {
     std::vector <std::string> words; // Vector to hold our words we read in.
 
     std::string str;
 
-    std::ifstream fin("text.txt"); // Open it up!
+    std::ifstream fin(file); // Open it up!
     int i =0;
     std::string result;
     while (fin >> str) // Will read up to eof() and stop at every
@@ -44,7 +44,7 @@ void FileReader::read_from_file(Queue &queue) {
 
 FileReader::FileReader(int block_size) : block_size(block_size) {}
 
-void FileReader::start(Queue &queue) {
-    std::thread t(read_from_file, this, std::ref(queue));
+void FileReader::start(Queue &queue,std::string file) {
+    std::thread t(read_from_file, this, std::ref(queue), file);
     t.join();
 }

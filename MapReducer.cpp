@@ -23,7 +23,7 @@ void MapReducer::map_reduce(MapsQueue &mapsQueue, Queue &queue){
              map1 = mapsQueue.pop();
              map2 = mapsQueue.pop();
         }
-           // std::cout<<"Size of mapsQueue after popping"<<mapsQueue.getSize()<<"\n";
+
             for (auto const &element : map2) {
                 if (result.count(element.first)) {
                     result[element.first] += element.second;
@@ -42,9 +42,8 @@ void MapReducer::map_reduce(MapsQueue &mapsQueue, Queue &queue){
             }
 
 
-            std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-           // std::cout<<"Pushing merged map\n";
             mapsQueue.push(result);
+            std :: unique_lock<std::mutex> lck(conditions.data_mutex);
             conditions.merging_in_process = false;
             conditions.queueHasMap.notify_one();
             result.clear();
