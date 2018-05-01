@@ -10,22 +10,22 @@ void configure(Configuration& conf);
 
 int main() {
 
-    Configuration conf;
-    try{
-        configure(conf);
-    }catch(...){
-        return 0;
-    }
-
-    std::cout<<conf;
+//    Configuration conf;
+//    try{
+//        configure(conf);
+//    }catch(...){
+//        return 0;
+//    }
+//
+//    std::cout<<conf;
 
 
 
     Queue queue;
-    FileReader  fileReader(4);
+    FileReader  fileReader(10000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
-    fileReader.start(queue, conf.getFileRead());
+    fileReader.start(queue, "text.txt");
     dispatcher.test();
 
 

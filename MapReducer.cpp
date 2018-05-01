@@ -10,19 +10,20 @@ void MapReducer::map_reduce(MapsQueue &mapsQueue, Queue &queue){
     std::map<std::string, int> map1;
     std::map<std::string, int> map2;
     while (true) {
+
         {
-            std::unique_lock<std::mutex> lck(conditions.data_mutex);
+            std::unique_lock<std::mutex> lck(conditions.reduce_mutex);
             if (conditions.readingIsFinished && queue.isEmpty()
                 && mapsQueue.getSize() == 1 && !conditions.merging_in_process) {
                 break;
             }
 
-            conditions.queueHasMap.wait(lck, [&mapsQueue] { return mapsQueue.getSize() >= 2; });
+            conditions.queueHasMap.wait(lck, [&mapsQueue, &queue] { return !(conditions.readingIsFinished && queue.isEmpty()
+                                                                   && mapsQueue.getSize() == 1 && !conditions.merging_in_process); });
             conditions.merging_in_process = true;
-
-             map1 = mapsQueue.pop();
-             map2 = mapsQueue.pop();
         }
+        map1 = mapsQueue.pop();
+        map2 = mapsQueue.pop();
 
             for (auto const &element : map2) {
                 if (result.count(element.first)) {
@@ -43,10 +44,18 @@ void MapReducer::map_reduce(MapsQueue &mapsQueue, Queue &queue){
 
 
             mapsQueue.push(result);
-            std :: unique_lock<std::mutex> lck(conditions.data_mutex);
+
+
+        {
+            std::unique_lock<std::mutex> lck(conditions.reduce_mutex);
             conditions.merging_in_process = false;
             conditions.queueHasMap.notify_one();
             result.clear();
+            if (conditions.readingIsFinished && queue.isEmpty()
+                && mapsQueue.getSize() == 1 && !conditions.merging_in_process) {
+                break;
+            }
+        }
         }
 
 }

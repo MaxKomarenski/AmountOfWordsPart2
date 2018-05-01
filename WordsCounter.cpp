@@ -11,8 +11,9 @@
      while (true) {
          {
              std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-             if(conditions.readingIsFinished && queue.isEmpty())
+             if(conditions.readingIsFinished && queue.isEmpty()) {
                  break;
+             }
              conditions.isData.wait(lck,[&queue] { return !queue.isEmpty();});
              data = queue.pop();
          }
@@ -28,7 +29,7 @@
              mapsQueue.push(m);
              std :: unique_lock<std::mutex> lck(conditions.data_mutex);
              conditions.queueHasMap.notify_one();
-            m.clear();
+             m.clear();
          }
      }
 }
