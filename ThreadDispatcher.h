@@ -24,7 +24,7 @@ private:
 public:
 
     ThreadDispatcher(Queue &queue, MapsQueue &mapsQueue);
-    void count_words();
+
     void test();
 
 
