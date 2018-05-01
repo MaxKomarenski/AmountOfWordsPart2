@@ -12,6 +12,10 @@ void FileReader::read_from_file(Queue &queue) {
     std::ifstream fin("here.txt"); // Open it up!
     int i =0;
     std::string result;
+   // std :: unique_lock<std::mutex> lck(conditions.data_mutex);
+    //std::cout<<"waiting for wc to get ready\n";
+   // conditions.wc_ready.wait(lck);
+    //std::cout<<"readinf file\n";
     while (fin >> str) // Will read up to eof() and stop at every
     {                  // whitespace it hits. (like spaces!)
 
@@ -29,11 +33,15 @@ void FileReader::read_from_file(Queue &queue) {
         i++;
         if(i >= block_size){
             queue.push(words);
+            conditions.isData.notify_one();
             words.clear();
             i=0;
         }
     }
     queue.push(words);
+    conditions.isData.notify_one();
+    conditions.readingIsFinished = true;
+
     fin.close(); // Close that file!
 
 }
@@ -41,8 +49,6 @@ void FileReader::read_from_file(Queue &queue) {
 FileReader::FileReader(int block_size) : block_size(block_size) {}
 
 void FileReader::start(Queue &queue) {
-
     std::thread t(read_from_file, this, std::ref(queue));
     t.join();
-
 }

@@ -19,12 +19,11 @@ private:
 
     unsigned int concurentThreadsSupported = std::thread::hardware_concurrency();
     std::vector<std::thread> word_counters;
-    std::vector<WordsCounter> testvec;
+    //std::vector<WordsCounter> testvec;
     std::vector<std::thread> map_mergers;
 public:
 
     ThreadDispatcher(Queue &queue, MapsQueue &mapsQueue);
-
     void count_words();
     void test();
 

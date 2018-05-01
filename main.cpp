@@ -3,40 +3,34 @@
 #include "MapsQueue.h"
 #include "ThreadDispatcher.h"
 
+
 int main() {
 
 
     Queue queue;
     FileReader  fileReader(10000);
     MapsQueue mapsQueue;
-    fileReader.start(queue);
-    std::cout<<queue.getSize()<<"\n";
+  //  std::thread read(read_from_file,std::ref(queue));
+   // read.join();
     ThreadDispatcher dispatcher(queue,mapsQueue);
-
-  //  dispatcher.setQueue(queue);
-    //dispatcher.setMapsQueue(mapsQueue);
-    dispatcher.getQueue().pop();
+    fileReader.start(queue);
+    std::cout<<"start test\n";
+    conditions.isData.notify_one();
+    dispatcher.test();
 
     std::cout<<queue.getSize()<<"\n";
-    dispatcher.test();
-   // ThreadDispatcher dispatcher(mapsQueue,queue);
 
-//    for(int i=0; i<8; i++){
-//        WordsCounter w;
-//        w.start_thread(mapsQueue,queue);
-//        dispatcher.getWord_counters().push_back(w);
-//    }
-//    for(auto wc:dispatcher.getWord_counters()){
-//        wc.join();
-//    }
 
-//    std::vector<std::string> words;
-//    while (!(words = queue.pop()).empty()){
-//        for(auto s: words){
-//            std::cout<<s<<"\n";
-//        }
-//        std::cout<<"BLOCK:  \n";
-//    }
+
+
+
+
+    std::cout<<queue.getSize()<<"\n";
+    std::cout<<mapsQueue.getSize()<<"\n";
+
+
 
     return 0;
 }
+
+

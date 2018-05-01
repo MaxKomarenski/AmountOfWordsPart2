@@ -8,6 +8,8 @@
 #include "Queue.h"
 #include "fstream"
 #include "algorithm"
+#include "ConditionVariables.h"
+#include <iostream>
 class FileReader {
 
 private:

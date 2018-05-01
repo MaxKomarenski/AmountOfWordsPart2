@@ -37,3 +37,7 @@ MapsQueue::MapsQueue() {
 MapsQueue::MapsQueue(MapsQueue &q) {
     queue = q.queue;
 }
+
+const std::vector<std::map<std::string, int>> &MapsQueue::getQueue() const {
+    return queue;
+}

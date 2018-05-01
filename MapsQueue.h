@@ -17,6 +17,9 @@ class MapsQueue {
     std::vector<std::map<std::string, int>> queue;
     std::mutex gueue_mutex;
 public:
+    const std::vector<std::map<std::string, int>> &getQueue() const;
+
+public:
 
     MapsQueue();
 

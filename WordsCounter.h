@@ -9,13 +9,17 @@
 #include <iostream>
 #include "Queue.h"
 #include <thread>
+#include "ConditionVariables.h"
 
 class WordsCounter {
 
 private:
-    std::thread tr;
+
+    std::thread *tr;
 
 public:
+    WordsCounter();
+
     WordsCounter(MapsQueue &mapsQueue, Queue &queue);
 
 

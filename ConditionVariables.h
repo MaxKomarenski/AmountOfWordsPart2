@@ -7,9 +7,11 @@
 
 #include <condition_variable>
 struct ConditionVariables{
+    std::mutex data_mutex;
     std:: condition_variable isData;
     std:: condition_variable queueHasMap;
-    std:: condition_variable readingIsFinished;
+    std:: condition_variable wc_ready;
+    bool readingIsFinished = false;
 };
 
 

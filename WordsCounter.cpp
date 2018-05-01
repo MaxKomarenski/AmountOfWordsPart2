@@ -4,28 +4,39 @@
 
 #include "WordsCounter.h"
 
-void WordsCounter::count_words(MapsQueue &mapsQueue, Queue &queue) {
+ void WordsCounter::count_words(MapsQueue &mapsQueue, Queue &queue) {
     std::map <std::string, int> m;
 
 
-    std::cout<<"THREAD "<<std::this_thread::get_id()<<"\n";
-//    for (int i = 0; i < words.size(); ++i){
-//        if (m.count(words.at(i))){
-//            m[words.at(i)] += 1;
-//        }else{
-//            m[words.at(i)] = 1;
-//        }
-//        mapsQueue.push(m);
-//    }
+
+        std::vector<std::string> data;
+        while (true) {
+            data = queue.pop();
+            std::cout<<"Working "<<std::this_thread::get_id()<<"\n";
+            for (int i = 0; i < data.size(); ++i){
+                if (m.count(data.at(i))){
+                    m[data.at(i)] += 1;
+                }else{
+                     m[data.at(i)] = 1;
+                }
+
+            }
+            mapsQueue.push(m);
+            if(conditions.readingIsFinished)
+                break;
+            m.clear();
+        }
 }
 
 WordsCounter::WordsCounter(MapsQueue &mapsQueue, Queue &queue) {
-    tr = std::thread(count_words, this, std::ref(mapsQueue), std::ref(queue));
+   // tr = new std::thread(count_words, this, std::ref(mapsQueue), std::ref(queue));
 }
 
 void WordsCounter::join() {
-    tr.join();
+  //  tr->join();
 }
+
+WordsCounter::WordsCounter() {}
 
 
 
