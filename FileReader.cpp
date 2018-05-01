@@ -12,10 +12,6 @@ void FileReader::read_from_file(Queue &queue) {
     std::ifstream fin("here.txt"); // Open it up!
     int i =0;
     std::string result;
-   // std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-    //std::cout<<"waiting for wc to get ready\n";
-   // conditions.wc_ready.wait(lck);
-    //std::cout<<"readinf file\n";
     while (fin >> str) // Will read up to eof() and stop at every
     {                  // whitespace it hits. (like spaces!)
 

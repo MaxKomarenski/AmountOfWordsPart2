@@ -1,0 +1,14 @@
+//
+// Created by Victor on 01.05.2018.
+//
+
+#ifndef AMOUNTOFWORDSPART2_FILEWRITER_H
+#define AMOUNTOFWORDSPART2_FILEWRITER_H
+
+
+class FileWriter {
+
+};
+
+
+#endif //AMOUNTOFWORDSPART2_FILEWRITER_H

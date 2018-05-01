@@ -15,8 +15,10 @@ ThreadDispatcher::ThreadDispatcher(Queue &queue, MapsQueue &mapsQueue) : queue(q
 
 void ThreadDispatcher::test() {
 
+    auto *wc_ptr = new WordsCounter(mapsQueue,queue);
+
     for (int i = 0; i < 5; i++) {
-        word_counters.emplace_back(std::thread(count_words, this));
+        word_counters.emplace_back(std::thread(&WordsCounter::count_words, wc_ptr, std::ref(mapsQueue), std::ref(queue)));
     }
     for (int i = 0; i < 5; i++) {
         word_counters[i].join();
@@ -26,8 +28,6 @@ void ThreadDispatcher::test() {
 
 void ThreadDispatcher::count_words() {
     std::map <std::string, int> m;
-
-
 
     std::vector<std::string> data;
     while (true) {
@@ -47,6 +47,7 @@ void ThreadDispatcher::count_words() {
 
         }
         std :: unique_lock<std::mutex> lck(conditions.data_mutex);
+        conditions.queueHasMap.notify_one();
         mapsQueue.push(m);
         m.clear();
     }
