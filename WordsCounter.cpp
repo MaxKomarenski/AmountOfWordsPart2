@@ -25,8 +25,8 @@
 
          }
          std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-         conditions.queueHasMap.notify_one();
          mapsQueue.push(m);
+         conditions.queueHasMap.notify_one();
          m.clear();
      }
 }

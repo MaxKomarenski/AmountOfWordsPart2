@@ -8,11 +8,13 @@
 #include <map>
 #include <vector>
 #include <string>
+#include "MapsQueue.h"
+#include "Queue.h"
 
 
 class MapReducer {
 
-    std::map<std::string, int> merge_in_one_map(std::map<std::string, int> map1, std::map<std::string, int> map2);
+    void map_reduce(MapsQueue &mapsQueue, Queue &queue);
 
 };
 
