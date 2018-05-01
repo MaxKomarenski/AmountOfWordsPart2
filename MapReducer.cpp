@@ -14,7 +14,6 @@ void MapReducer::map_reduce(MapsQueue &mapsQueue, Queue &queue){
             std::unique_lock<std::mutex> lck(conditions.data_mutex);
             if (conditions.readingIsFinished && queue.isEmpty()
                 && mapsQueue.getSize() == 1 && !conditions.merging_in_process) {
-                conditions.reduce_finished.notify_one();
                 break;
             }
 
