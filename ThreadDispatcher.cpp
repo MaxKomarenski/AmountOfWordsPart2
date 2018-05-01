@@ -26,32 +26,7 @@ void ThreadDispatcher::test() {
 
 }
 
-void ThreadDispatcher::count_words() {
-    std::map <std::string, int> m;
 
-    std::vector<std::string> data;
-    while (true) {
-        {
-            std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-            if(conditions.readingIsFinished && queue.isEmpty())
-                break;
-            conditions.isData.wait(lck,[this] { return !queue.isEmpty();});
-            data = queue.pop();
-        }
-        for (int i = 0; i < data.size(); ++i){
-            if (m.count(data.at(i))){
-                m[data.at(i)] += 1;
-            }else{
-                m[data.at(i)] = 1;
-            }
-
-        }
-        std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-        conditions.queueHasMap.notify_one();
-        mapsQueue.push(m);
-        m.clear();
-    }
-}
 
 
 
