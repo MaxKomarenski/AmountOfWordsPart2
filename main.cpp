@@ -34,7 +34,7 @@ int main() {
     auto stage1_start_time = get_current_time_fenced(); //time point
 
     Queue queue;
-    FileReader  fileReader(1000000);
+    FileReader  fileReader(50000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
     fileReader.start(queue, conf.getFileRead());
