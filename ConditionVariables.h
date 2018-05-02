@@ -12,10 +12,7 @@ struct ConditionVariables{
     int word_counters_alive;
     std:: condition_variable isData;
     std:: condition_variable queueHasMap;
-    std:: condition_variable reduce_finished;
     bool readingIsFinished = false;
-    bool merging_in_process = false;
-
 };
 
 

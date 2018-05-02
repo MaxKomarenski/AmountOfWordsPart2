@@ -35,20 +35,14 @@ int main() {
 
     auto stage1_start_time = get_current_time_fenced(); //time point
 
-
     Queue queue;
-    FileReader  fileReader(10000);
+    FileReader  fileReader(1000000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
     fileReader.start(queue, conf.getFileRead());
     dispatcher.start();
     fileReader.reading_thread->join();
     dispatcher.joinAll();
-
-
-
-
-
 
     auto finish_time = get_current_time_fenced();
     auto total_time = finish_time - stage1_start_time;
@@ -60,6 +54,7 @@ int main() {
     fileWriter.sort_by_amount_and_write_into_file(target, conf.getFileWriteSortedByAmount());
 
     std::cout << "\nTime: " << to_us(total_time) << std::endl;
+    std::cout << "\nTime sec : " << to_us(total_time)/1000000 << std::endl;
 
     return 0;
 }
@@ -75,13 +70,9 @@ void configure(Configuration& conf){
         configFile.open("config.txt");
         configFile<<conf.getFileReadToken()<<"\n"<<conf.getFileWriteSortedByAmountToken()<<"\n"
                   <<conf.getFileWriteSortedByLettersToken()<<"\n";
-
-
         throw EIO;
 
     }
-
-
     char buf[50];
     std::string input_string;
     while (configuration.getline(buf, 50)) {
