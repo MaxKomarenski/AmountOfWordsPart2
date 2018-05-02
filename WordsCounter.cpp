@@ -10,11 +10,13 @@
      std::vector<std::string> data;
      while (true) {
          {
-             std :: unique_lock<std::mutex> lck(conditions.data_mutex);
-             if(conditions.readingIsFinished && queue.isEmpty()) {
+             std :: unique_lock<std::mutex> lck(conditions.read_mutex);
+             if(conditions.readingIsFinished && queue.getSize() == 0) {
+                 conditions.queueHasMap.notify_one();
+                 conditions.word_counters_alive--;
                  break;
              }
-             conditions.isData.wait(lck,[&queue] { return !queue.isEmpty();});
+             conditions.isData.wait(lck,[&queue] { return !conditions.readingIsFinished || queue.getSize() != 0;});
              data = queue.pop();
          }
          for (int i = 0; i < data.size(); ++i){
@@ -23,11 +25,17 @@
              }else{
                  m[data.at(i)] = 1;
              }
-
          }
          {
-             mapsQueue.push(m);
+
              std :: unique_lock<std::mutex> lck(conditions.data_mutex);
+             if(!m.empty())
+                 mapsQueue.push(m);
+             if(conditions.readingIsFinished && queue.getSize() == 0) {
+                 conditions.queueHasMap.notify_one();
+                 conditions.word_counters_alive--;
+                 break;
+             }
              conditions.queueHasMap.notify_one();
              m.clear();
          }

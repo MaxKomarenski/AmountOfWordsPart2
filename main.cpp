@@ -10,34 +10,40 @@ void configure(Configuration& conf);
 
 int main() {
 
-//    Configuration conf;
-//    try{
-//        configure(conf);
-//    }catch(...){
-//        return 0;
-//    }
-//
-//    std::cout<<conf;
+    Configuration conf;
+    try{
+        configure(conf);
+    }catch(...){
+        return 0;
+    }
 
-
+    std::cout<<conf;
 
     Queue queue;
-    FileReader  fileReader(10000);
+    FileReader  fileReader(1000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
-    fileReader.start(queue, "text.txt");
-    dispatcher.test();
+    fileReader.start(queue, conf.getFileRead());
+    dispatcher.start();
+    fileReader.reading_thread->join();
+    dispatcher.joinAll();
 
 
-    for(auto elem : mapsQueue.getQueue()){
-        for( auto m :elem){
-            std::cout<<m.first<<" "<<m.second<<"\n";
+    std::cout<<"MAP QUEUE SIZE :"<<mapsQueue.getSize()<<"\n";
+
+
+    for(auto x: mapsQueue.getQueue()){
+        for(auto elem : x){
+            std::cout<<elem.first<<" "<<elem.second<<"\n";
         }
     }
 
-   // FileWriter fileWriter;
 
-   // fileWriter.sort_by_letters_and_write_into_file(mapsQueue.pop(), "new.txt");
+    FileWriter fileWriter;
+    auto target = mapsQueue.pop();
+
+    fileWriter.sort_by_letters_and_write_into_file(target, conf.getFileWriteSortedByLetters());
+    fileWriter.sort_by_amount_and_write_into_file(target, conf.getFileWriteSortedByAmount());
 
 
 

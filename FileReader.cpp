@@ -29,6 +29,7 @@ void FileReader::read_from_file(Queue &queue,std::string file) {
         i++;
         if(i >= block_size){
             queue.push(words);
+            std :: unique_lock<std::mutex> lck(conditions.read_mutex);
             conditions.isData.notify_one();
             words.clear();
             i=0;
@@ -36,6 +37,7 @@ void FileReader::read_from_file(Queue &queue,std::string file) {
     }
     queue.push(words);
     conditions.isData.notify_one();
+    words.clear();
     conditions.readingIsFinished = true;
 
     fin.close(); // Close that file!
@@ -45,6 +47,10 @@ void FileReader::read_from_file(Queue &queue,std::string file) {
 FileReader::FileReader(int block_size) : block_size(block_size) {}
 
 void FileReader::start(Queue &queue,std::string file) {
-    std::thread t(read_from_file, this, std::ref(queue), file);
-    t.join();
+    reading_thread = new std::thread(read_from_file, this, std::ref(queue), file);
+}
+
+void FileReader::join() {
+
+    reading_thread->join();
 }

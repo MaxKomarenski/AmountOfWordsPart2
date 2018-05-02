@@ -16,6 +16,7 @@ class MapReducer {
 
 public:
     void map_reduce(MapsQueue &mapsQueue, Queue &queue);
+    std::map<std::string, int> & merge(std::map<std::string, int> m1, std::map<std::string, int> m2, std::map<std::string, int> &result);
 
 };
 
