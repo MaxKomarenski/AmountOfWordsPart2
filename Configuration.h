@@ -6,7 +6,7 @@
 #define AMOUNTOFWORDS_CONFIGURATION_H
 #include <string>
 #include <iostream>
-
+#include <fstream>
 
 class Configuration {
 
@@ -41,6 +41,7 @@ public:
 
     std::string parseString(std::string input);
 
+    static void configure(Configuration &conf);
     friend std::ostream &operator<<(std::ostream &os, const Configuration &configuration);
 
 };
