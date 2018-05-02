@@ -37,7 +37,7 @@ int main() {
 
 
     Queue queue;
-    FileReader  fileReader(1000);
+    FileReader  fileReader(10000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
     fileReader.start(queue, conf.getFileRead());
@@ -46,13 +46,8 @@ int main() {
     dispatcher.joinAll();
 
 
-    std::cout<<"MAP QUEUE SIZE :"<<mapsQueue.getSize()<<"\n";
 
-    for(auto x: mapsQueue.getQueue()){
-        for(auto elem : x){
-            std::cout<<elem.first<<" "<<elem.second<<"\n";
-        }
-    }
+
 
 
     auto finish_time = get_current_time_fenced();
