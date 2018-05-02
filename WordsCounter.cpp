@@ -43,12 +43,9 @@
 }
 
 WordsCounter::WordsCounter(MapsQueue &mapsQueue, Queue &queue) {
-   // tr = new std::thread(count_words, this, std::ref(mapsQueue), std::ref(queue));
+
 }
 
-void WordsCounter::join() {
-  //  tr->join();
-}
 
 WordsCounter::WordsCounter() {}
 

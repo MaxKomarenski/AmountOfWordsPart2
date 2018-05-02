@@ -50,7 +50,4 @@ void FileReader::start(Queue &queue,std::string file) {
     reading_thread = new std::thread(read_from_file, this, std::ref(queue), file);
 }
 
-void FileReader::join() {
 
-    reading_thread->join();
-}

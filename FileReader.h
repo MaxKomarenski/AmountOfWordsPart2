@@ -19,7 +19,7 @@ public:
     std::thread *reading_thread;
     FileReader(int block_size);
     void  start(Queue &queue,std::string file);
-    void join();
+
 
 private:
     void read_from_file(Queue &queue, std::string file);

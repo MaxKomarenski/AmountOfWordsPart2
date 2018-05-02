@@ -15,8 +15,6 @@ class WordsCounter {
 
 private:
 
-    std::thread *tr;
-
 public:
     WordsCounter();
 
@@ -25,7 +23,6 @@ public:
 
 public:
     void count_words(MapsQueue &mapsQueue, Queue &queue);
-    void join();
 
 };
 
