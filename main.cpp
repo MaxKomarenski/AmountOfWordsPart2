@@ -48,7 +48,6 @@ int main() {
 
     std::cout<<"MAP QUEUE SIZE :"<<mapsQueue.getSize()<<"\n";
 
-
     for(auto x: mapsQueue.getQueue()){
         for(auto elem : x){
             std::cout<<elem.first<<" "<<elem.second<<"\n";
