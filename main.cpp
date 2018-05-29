@@ -27,8 +27,9 @@ int main() {
 
     Configuration conf;
     try{
-        configure(conf);
+        Configuration::configure(conf);
     }catch(...){
+        std::cout<<"Error during configuration."<< std::endl;
         return 0;
     }
 
