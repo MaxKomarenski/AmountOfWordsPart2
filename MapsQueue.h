@@ -27,7 +27,7 @@ public:
 
     void push(std::map<std::string, int> &m);
     std::map<std::string, int> pop();
-    unsigned long getSize();
+    size_t getSize() const;
     bool isEmpty();
 
 };

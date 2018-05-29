@@ -16,8 +16,7 @@ class ThreadDispatcher {
 private:
     Queue &queue;
     MapsQueue &mapsQueue;
-    WordsCounter *wc_ptr = new WordsCounter(mapsQueue,queue);
-    MapReducer *mr_ptr = new MapReducer();
+
 
     unsigned int concurentThreadsSupported = std::thread::hardware_concurrency();
     int max_word_counters;

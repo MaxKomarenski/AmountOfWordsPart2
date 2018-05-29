@@ -20,7 +20,7 @@ void FileReader::read_from_file(Queue &queue,std::string file) {
                             std::ptr_fun<int, int>(&std::ispunct)
         );
 
-        if(result != ""){
+        if(!result.empty()){
             std::transform(str.begin(), str.end(), str.begin(), ::tolower); // make string lowercase
             words.push_back(result);
             result.clear();
@@ -47,7 +47,7 @@ void FileReader::read_from_file(Queue &queue,std::string file) {
 FileReader::FileReader(int block_size) : block_size(block_size) {}
 
 void FileReader::start(Queue &queue,std::string file) {
-    reading_thread = new std::thread(read_from_file, this, std::ref(queue), file);
+    reading_thread = new std::thread(&FileReader::read_from_file, this, std::ref(queue), file);
 }
 
 

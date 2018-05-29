@@ -19,6 +19,9 @@ ThreadDispatcher::ThreadDispatcher(Queue &queue, MapsQueue &mapsQueue) : queue(q
 }
 
 void ThreadDispatcher::start() {
+    WordsCounter wc_ptr(mapsQueue,queue);
+    MapReducer mr_ptr;
+
     conditions.word_counters_alive = max_word_counters;
     for (int i = 0; i < max_map_redusers; i++) {
         map_mergers.emplace_back(std::thread(&MapReducer::map_reduce, mr_ptr, std::ref(mapsQueue), std::ref(queue)));

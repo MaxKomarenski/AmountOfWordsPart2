@@ -5,7 +5,7 @@
 #include "MapsQueue.h"
 
 void MapsQueue::push(std::map<std::string, int> &m) {
-    std::lock_guard<std::mutex> lock(gueue_mutex);
+
     queue.push_back(m);
 }
 
@@ -20,13 +20,12 @@ std::map<std::string, int> MapsQueue::pop() {
     return m;
 }
 
-unsigned long MapsQueue::getSize() {
-    std::lock_guard<std::mutex> lock(gueue_mutex);
+size_t MapsQueue::getSize() const {
+
     return queue.size();
 }
 
 bool MapsQueue::isEmpty() {
-    std::lock_guard<std::mutex> lock(gueue_mutex);
     return queue.empty();
 }
 

@@ -23,7 +23,9 @@ void MapReducer::map_reduce(MapsQueue &mapsQueue, Queue &queue){
         lck.unlock();
 
         merge(map1, map2,result);
+        lck.lock();
         mapsQueue.push(result);
+        lck.unlock();
         conditions.queueHasMap.notify_one();
 
 

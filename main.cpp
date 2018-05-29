@@ -4,6 +4,7 @@
 #include "ThreadDispatcher.h"
 #include "Configuration.h"
 #include "FileWriter.h"
+#include <thread>
 
 inline std::chrono::high_resolution_clock::time_point get_current_time_fenced()
 {
@@ -36,7 +37,7 @@ int main() {
     auto stage1_start_time = get_current_time_fenced(); //time point
 
     Queue queue;
-    FileReader  fileReader(1000000);
+    FileReader  fileReader(100000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
     fileReader.start(queue, conf.getFileRead());

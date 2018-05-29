@@ -19,7 +19,7 @@ std::vector<std::string> Queue::pop() {
 
 }
 
-unsigned long Queue::getSize() {
+size_t Queue::getSize() const {
 
     return queue.size();
 }

@@ -23,7 +23,7 @@ public:
 public:
     void push(std::vector<std::string> &v);
     std::vector<std::string> pop();
-    unsigned long getSize();
+    size_t getSize() const;
     bool isEmpty();
 
     virtual ~Queue();
