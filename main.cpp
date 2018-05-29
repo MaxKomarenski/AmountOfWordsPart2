@@ -37,7 +37,7 @@ int main() {
     auto stage1_start_time = get_current_time_fenced(); //time point
 
     Queue queue;
-    FileReader  fileReader(100000);
+    FileReader  fileReader(50000);
     MapsQueue mapsQueue;
     ThreadDispatcher dispatcher(queue,mapsQueue);
     fileReader.start(queue, conf.getFileRead());
@@ -61,41 +61,7 @@ int main() {
 }
 
 
-void configure(Configuration& conf){
 
-    std::ifstream configuration("config.txt");
-    if(!configuration.is_open()){
-        std::cout<<"No configuration file found\nfile name should be config.txt\nIt will be created for you\n"<<
-                 "Fill config info and restart program";
-        std::ofstream configFile;
-        configFile.open("config.txt");
-        configFile<<conf.getFileReadToken()<<"\n"<<conf.getFileWriteSortedByAmountToken()<<"\n"
-                  <<conf.getFileWriteSortedByLettersToken()<<"\n";
-        throw EIO;
-
-    }
-    char buf[50];
-    std::string input_string;
-    while (configuration.getline(buf, 50)) {
-        input_string.clear();
-        input_string.append(buf);
-        if(input_string.find(conf.getFileReadToken())==0){
-
-            conf.setFileRead(conf.parseString(input_string));
-
-        } else if(input_string.find(conf.getFileWriteSortedByAmountToken())==0){
-
-
-            conf.setFileWriteSortedByAmount(conf.parseString(input_string));
-
-        } else if(input_string.find(conf.getFileWriteSortedByLettersToken())==0){
-
-            conf.setFileWriteSortedByLetters(conf.parseString(input_string));
-
-        }
-
-    }
-}
 
 
 
